@@ -442,6 +442,7 @@ function menuCamperOpc1() {
         "3). Ruta del camper.\n" +
         "4). Trainer del camper\n" +
         "5). Modulo en el que se encuetra el camper.\n" +
+        "6). Salir.\n" +
         "-------------------------------------------------\n"
     );
 };
@@ -464,12 +465,12 @@ function menuCampersOpc3() {
 function menuTrainer() {
     console.log("");
     console.log(
-        "///////////////////////////////////////////////////\n"+
+        "///////////////////////////////////////////////////\n" +
         "----------------- BIENVENIDO TRAINER --------------\n" +
         "1). Cambiar usuario y contraseña.\n" +
         "2). Ruta de entrenamiento.\n" +
         "3). Cambiar información.\n" +
-        "-------------------------------------------------\n"+
+        "-------------------------------------------------\n" +
         "///////////////////////////////////////////////////"
     );
 };
@@ -492,18 +493,18 @@ function menuTrainerOpc3() {
 function menuCoordinador() {
     console.log("");
     console.log(
-        "////////////////////////////////////////////////////////////////\n"+
+        "////////////////////////////////////////////////////////////////\n" +
         "-------------------- Bienvenido coordinador --------------------\n" +
         "1). Cambiar usuarios y contraseñas de todo el sistema educativo.\n" +
         "2). Cambiar informacion de todo el sistema educativo.\n" +
         "3). Agregar nota de examen de aprobación.\n" +
         "4). Agregar nota de filtro. \n" +
         "5). Consultar cuales campers se encuentra en riesgo alto.\n" +
-        "6). Reporte.\n"+
+        "6). Reporte.\n" +
         "7). Crear nuevas rutas.\n" +
         "8). Crear nuevos campers.\n" +
         "9). Salir.\n" +
-        "----------------------------------------------------------------\n"+
+        "----------------------------------------------------------------\n" +
         "////////////////////////////////////////////////////////////////"
     );
 };
@@ -524,41 +525,166 @@ function menuCoordinadorOpc8() {
     );
 };
 
-let user=prompt("Ingrese su usuario: ");
-var x=0
+var user = prompt("Ingrese su usuario: \n");
+let x = 0
+while (x == 0) {
+    for (const i of campuland[0]["Campers"]) {
+        if (user == i["user"]["login"]) {
+            x += 1
+            let passwordCamper = prompt("Ingresa su contraseña:\n")
 
-while (x==0){
-    for (const i of campuland[0]["Campers"]){
-        if (user==i["user"]["login"]){
-            x+=1
-            var passwordCamper=prompt("Ingresa su contraseña:\n")
-
-            while (passwordCamper != i["user"]["contraseña"]){
-                passwordCamper=prompt("Contraseña incorrecta ingresa otra vez\n")
-                break
+            while (passwordCamper != i["user"]["contraseña"]) {
+                passwordCamper = prompt("Contraseña incorrecta ingresa otra vez\n")
             }
-            menuCampers();
-            var opcMenuCamper= prompt("Ingresa una opcion de las que aparecen en pantalla")
-            var campers=true;
-            while (campers=true){
-                if (opcMenuCamper==1){
-                    menuCamperOpc1()
-                    var newOpc1=prompt("Ingrese una opcion del menu anterior")
-                    if (newOpc1==1){
-                        console.log("--- Hola",campuland[0]["Campers"][i]["nombres"],"estos son tus datos: -----------\n")
-                        console.log("    Numero de identificaion:",campuland[0]["Campers"][i]["numeroIdentificacion"])
-                        console.log("    Nombres:",campuland[0]["Campers"][i]["nombres"])
-                        console.log("    Apellidos:",campuland[0]["Campers"][i]["apellidos"])
-                        console.log("    Direccion:",campuland[0]["Campers"][i]["direccion"])
-                        console.log("    Acudiente:",campuland[0]["Campers"][i]["acudiente"])
-                        console.log("    Telefono celular:",campuland[0]["Campers"][i]["telefonoCelular"])
-                        console.log("    Telefono fijo:",campuland[0]["Campers"][i]["telefonoFijo"])
-                        console.logt("------------------------------------------------------")
-                        break
+
+            menuCampers()
+            var opcMenuCamper = prompt("Ingresa una opcion de las que aparecen en pantalla")
+
+            var campers = true;
+            while (campers == true) {
+                if (opcMenuCamper == 1) {
+                    var confirmacion = "si";
+                    while (confirmacion == "si") {
+                        menuCamperOpc1()
+
+                        var newOpc1 = prompt("Ingrese una opcion del menu anterior")
+
+                        if (newOpc1 == 1) {
+                            console.log("--- Hola", i["nombres"], "estos son tus datos: ----------\n");
+                            console.log("    Numero de identificaion:", i["numeroIdentificacion"]);
+                            console.log("    Nombres:", i["nombres"]);
+                            console.log("    Apellidos:", i["apellidos"]);
+                            console.log("    Direccion:", i["direccion"]);
+                            console.log("    Acudiente:", i["acudiente"]);
+                            console.log("    Telefono celular:", i["telefonoCelular"]);
+                            console.log("    Telefono fijo:", i["telefonoFijo"]);
+                            console.log("------------------------------------------------------");
+
+                            confirmacion = prompt("Si quieres ver otro reporte escribe: si, de lo contrario preciona enter\n")
+                        }
+
+                        else if (newOpc1 == 2) {
+                            var mod = i["moduloActual"]
+                            mod = mod - 1
+                            if (i["estado"] == "Aprobado" || i["estado"] == "Cursando") {
+                                console.log("Tu riesgo es: " + i["riesgo"][mod], "\n")
+                            }
+                            else (console.log("Tu estado es:", i["estado"], "por lo tanto no tienes riesgo"))
+
+                            confirmacion = prompt("Si quieres ver otro reporte escribe: si, de lo contrario preciona enter\n")
+                        }
+
+                        else if (newOpc1 == 3) {
+                            console.log("Tu ruta es: ", i["ruta"])
+
+                            confirmacion = prompt("Si quieres ver otro reporte escribe: si, de lo contrario preciona enter\n")
+                        }
+
+                        else if (newOpc1 == 4) {
+                            console.log("Tu trainer es:", i["trainer"], "\n")
+
+                            confirmacion = prompt("Si quieres ver otro reporte escribe: si, de lo contrario preciona enter\n")
+                        }
+
+                        else if (newOpc1 == 5) {
+                            console.log("El modulo que te encuentras actualmente es:", i["moduloActual"])
+
+                            confirmacion = prompt("Si quieres ver otro reporte escribe: si, de lo contrario preciona enter\n")
+                        }
+
+                        else if (newOpc1 == 6) {
+                            confirmacion=false
+                        }
+                    menuCampers()
+                    }}
+
+                else if (opcMenuCamper == 2){
+                    var newUser1=prompt("¿Cual es el nuevo usuario?\n")
+                    var bol1=true;
+                    while (bol1 == true){
+                        cont=0
+
+                        for (const e of campuland[0]["Campers"]){
+                            if ( newUser1== e["user"]["login"]){
+                                cont=cont+1
+                            }
+                        }
+                        for (const r of campuland[0]["Trainer"]){
+                            if (newUser1==r["user"]["login"]){
+                                cont=cont+1
+                            }
+                        }
+                        if (newUser1==archivo["Coordinador"][0]["user"]["login"]){
+                            cont8=cont8+1}
+                        
+                        else if (cont==0){
+                            bol1=false}
+                        else (newUser1=prompt("Ese usuario ya existe por favor ingresa uno nuevo\n"))
+                    
                     }
+                    campuland["Campers"][i]["user"]["login"]=newUser1
+
+                    newPass1=prompt("¿Ingrese la nueva contraseña?\n")
+
+                    campuland["Campers"][i]["user"]["contraseña"]=newPass1
+
+                    menuCampers()}
+
+                else if (opcMenuCamper == 3){
+                    confirmacion1 = "si";
+                    while(confirmacion=="si"){
+                        menuCampersOpc3()
+
+                        var numOpc3= prompt("Ingrese una de las opciones del menu anterior\n")
+
+                        if (numOpc3==1){
+                            newAdress=prompt("Ingrese la nueva direccion\n")
+
+                            campuland["Campers"][i]["direccion"]=newAdress
+
+                            confirmacion=prompt("Si deseas cambiar otra información escribe: si, de lo contrario preciona enter\n")}
+
+                        else if (numOpc3==2){
+                            newPhone=prompt("Ingrese el nuevo telefono movil\n")
+
+                            confirmacion=prompt("Si deseas cambiar otra información escribe: si, de lo contrario preciona enter\n")
+
+                            campuland["Campers"][i]["telefonoCelular"]=newPhone}
+
+                        else if (numOpc3==3){
+                            newFijo=prompt("Ingrese el nuevo telefono fijo\n")
+
+                            confirmacion=prompt("Si deseas cambiar otra información escribe: si, de lo contrario preciona enter\n")
+
+                            campuland["Campers"][i]["telefonoFijo"]=newFijo}
+
+                        else if(numOpc3==4){
+                            confirmacion1="no"}
+                    }
+                    menuCampers()
                 }
 
+                else if (opcMenuCamper==4){
+                    var actividadSecion=prompt("¿que actividades realisaste en esta secion?\n") 
+
+                    registro.push({"idCamper": campuland["Campers"][i]["id"],"fecha_entrada":fechaRegistro,"actividades_realizadas":actividadSecion,"estado de sesion":"finalizada" })
+                    campers=False
+                }
+                
             }
         }
     }
+    for (const i of campuland[0]["Trainers"]){
+        if (user == campuland["Trainers"][q]["user"]["login"]){
+            x+1
+            passwordTrainer=prompt("Ingresa la contraseña\n")
+
+            while (passwordTrainer != q["user"]["contraseña"]){
+                passwordTrainer=prompt("Contraseña incorrecta ingresela otra vez\n")
+            }
+
+            menuTrainer()
+        }
+    }
+
 }
