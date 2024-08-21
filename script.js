@@ -593,98 +593,328 @@ while (x == 0) {
                         }
 
                         else if (newOpc1 == 6) {
-                            confirmacion=false
+                            break
                         }
-                    menuCampers()
-                    }}
-
-                else if (opcMenuCamper == 2){
-                    var newUser1=prompt("¿Cual es el nuevo usuario?\n")
-                    var bol1=true;
-                    while (bol1 == true){
-                        cont=0
-
-                        for (const e of campuland[0]["Campers"]){
-                            if ( newUser1== e["user"]["login"]){
-                                cont=cont+1
-                            }
-                        }
-                        for (const r of campuland[0]["Trainer"]){
-                            if (newUser1==r["user"]["login"]){
-                                cont=cont+1
-                            }
-                        }
-                        if (newUser1==archivo["Coordinador"][0]["user"]["login"]){
-                            cont8=cont8+1}
-                        
-                        else if (cont==0){
-                            bol1=false}
-                        else (newUser1=prompt("Ese usuario ya existe por favor ingresa uno nuevo\n"))
-                    
+                        menuCampers()
                     }
-                    campuland["Campers"][i]["user"]["login"]=newUser1
+                }
 
-                    newPass1=prompt("¿Ingrese la nueva contraseña?\n")
+                else if (opcMenuCamper == 2) {
+                    var newUser1 = prompt("¿Cual es el nuevo usuario?\n")
+                    var bol1 = true;
+                    while (bol1 == true) {
+                        cont = 0
 
-                    campuland["Campers"][i]["user"]["contraseña"]=newPass1
+                        for (const e of campuland[0]["Campers"]) {
+                            if (newUser1 == e["user"]["login"]) {
+                                cont = cont + 1
+                            }
+                        }
+                        for (const r of campuland[0]["Trainer"]) {
+                            if (newUser1 == r["user"]["login"]) {
+                                cont = cont + 1
+                            }
+                        }
+                        if (newUser1 == campuland["Coordinador"][0]["user"]["login"]) {
+                            cont8 = cont8 + 1
+                        }
 
-                    menuCampers()}
+                        else if (cont == 0) {
+                            bol1 = false
+                        }
+                        else (newUser1 = prompt("Ese usuario ya existe por favor ingresa uno nuevo\n"))
 
-                else if (opcMenuCamper == 3){
+                    }
+                    campuland["Campers"][i]["user"]["login"] = newUser1
+
+                    newPass1 = prompt("¿Ingrese la nueva contraseña?\n")
+
+                    campuland["Campers"][i]["user"]["contraseña"] = newPass1
+
+                    menuCampers()
+                }
+
+                else if (opcMenuCamper == 3) {
                     confirmacion1 = "si";
-                    while(confirmacion=="si"){
+                    while (confirmacion == "si") {
                         menuCampersOpc3()
 
-                        var numOpc3= prompt("Ingrese una de las opciones del menu anterior\n")
+                        var numOpc3 = prompt("Ingrese una de las opciones del menu anterior\n")
 
-                        if (numOpc3==1){
-                            newAdress=prompt("Ingrese la nueva direccion\n")
+                        if (numOpc3 == 1) {
+                            newAdress = prompt("Ingrese la nueva direccion\n")
 
-                            campuland["Campers"][i]["direccion"]=newAdress
+                            campuland["Campers"][i]["direccion"] = newAdress
 
-                            confirmacion=prompt("Si deseas cambiar otra información escribe: si, de lo contrario preciona enter\n")}
+                            confirmacion = prompt("Si deseas cambiar otra información escribe: si, de lo contrario preciona enter\n")
+                        }
 
-                        else if (numOpc3==2){
-                            newPhone=prompt("Ingrese el nuevo telefono movil\n")
+                        else if (numOpc3 == 2) {
+                            newPhone = prompt("Ingrese el nuevo telefono movil\n")
 
-                            confirmacion=prompt("Si deseas cambiar otra información escribe: si, de lo contrario preciona enter\n")
+                            confirmacion = prompt("Si deseas cambiar otra información escribe: si, de lo contrario preciona enter\n")
 
-                            campuland["Campers"][i]["telefonoCelular"]=newPhone}
+                            campuland["Campers"][i]["telefonoCelular"] = newPhone
+                        }
 
-                        else if (numOpc3==3){
-                            newFijo=prompt("Ingrese el nuevo telefono fijo\n")
+                        else if (numOpc3 == 3) {
+                            newFijo = prompt("Ingrese el nuevo telefono fijo\n")
 
-                            confirmacion=prompt("Si deseas cambiar otra información escribe: si, de lo contrario preciona enter\n")
+                            confirmacion = prompt("Si deseas cambiar otra información escribe: si, de lo contrario preciona enter\n")
 
-                            campuland["Campers"][i]["telefonoFijo"]=newFijo}
+                            campuland["Campers"][i]["telefonoFijo"] = newFijo
+                        }
 
-                        else if(numOpc3==4){
-                            confirmacion1="no"}
+                        else if (numOpc3 == 4) {
+                            confirmacion1 = "no"
+                        }
                     }
                     menuCampers()
                 }
 
-                else if (opcMenuCamper==4){
-                    var actividadSecion=prompt("¿que actividades realisaste en esta secion?\n") 
+                else if (opcMenuCamper == 4) {
+                    var actividadSecion = prompt("¿que actividades realisaste en esta secion?\n")
 
-                    registro.push({"idCamper": campuland["Campers"][i]["id"],"fecha_entrada":fechaRegistro,"actividades_realizadas":actividadSecion,"estado de sesion":"finalizada" })
-                    campers=False
+                    registro.push({ "idCamper": campuland["Campers"][i]["id"], "fecha_entrada": fechaRegistro, "actividades_realizadas": actividadSecion, "estado de sesion": "finalizada" })
+                    campers = False
                 }
-                
+
             }
         }
     }
-    for (const i of campuland[0]["Trainers"]){
-        if (user == campuland["Trainers"][q]["user"]["login"]){
-            x+1
-            passwordTrainer=prompt("Ingresa la contraseña\n")
+    for (const i of campuland[0]["Trainers"]) {
+        if (user == campuland["Trainers"][q]["user"]["login"]) {
+            x + 1
+            var passwordTrainer = prompt("Ingresa la contraseña\n");
 
-            while (passwordTrainer != q["user"]["contraseña"]){
-                passwordTrainer=prompt("Contraseña incorrecta ingresela otra vez\n")
+            while (passwordTrainer != q["user"]["contraseña"]) {
+                passwordTrainer = prompt("Contraseña incorrecta ingresela otra vez\n")
             }
 
             menuTrainer()
+            var opcMenuTrainer = prompt("Ingresa tu opcion\n");
+
+            trainers = true;
+            while (trainers == true) {
+                if (opcMenuTrainer == 1) {
+                    newUser2 = prompt("¿Cual es el nuevo usuario?:\n");
+
+                    bol2 = true;
+                    while (bol2 == true) {
+                        cont1 = 0
+
+                        for (const e of campuland[0]["Campers"]) {
+                            if (newUser2 == campuland["Campers"][e]["user"]["login"]) {
+                                cont1 = cont1 + 1
+                            }
+                        }
+
+                        for (const r of campuland["Trainers"]) {
+                            if (newUser2 == campuland["Trainers"][r]["user"]["login"]) {
+                                cont10 = cont10 + 1
+                            }
+
+                            else if (newUser2 == campuland["Coordinador"][0]["user"]["login"]) {
+                                cont10 = cont10 + 1
+                            }
+
+                            else if (cont10 == 0) {
+                                bol2 = False
+                            }
+
+                            else {
+                                newUser2 = prompt("Ese usuario ya existe por favor ingresa uno nuevo\n")
+                            }
+
+                        }
+                        campuland["Trainers"][q]["user"]["login"] = newUser2
+                        newPass2 = prompt("¿Cual es la nueva contraseña?:\n")
+                        campuland["Trainers"][q]["user"]["contraseña"] = newPass2
+                    }
+                    menuTrainer()
+                }
+                else if (opcMenuTrainer == 2) {
+                    console.log("La ruta de entrenamiento es", q["ruta"], "\n")
+
+                    menuTrainer()
+                }
+                else if (opcMenuTrainer == 3) {
+                    confirmacion2 = "si"
+                    while (confirmacion2 == "si") {
+                        menuTrainerOpc3()
+                        var newOpc = prompt("Ingrese una opcion de las que aparecen en la pantalla:\n")
+
+                        if (newOpc == 1) {
+                            var newAdress1 = prompt("Ingrese la nueva dirección:\n");
+                            campuland["Trainers"][q]["direccion"] = newAdress1
+
+                            confirmacion2 = prompt("Si deseas cambiar otra información escribe: si, de lo contrario preciona enter\n")
+                        }
+
+                        else if (newOpc == 2) {
+                            newPhone1 = prompt("Ingrese el nuevo telefono movil:\n");
+
+                            campuland["Trainers"][q]["telefonoCelular"] = newPhone1
+
+                            confirmacion2 = prompt("Si deseas cambiar otra información escribe: si, de lo contrario preciona enter\n")
+                        }
+
+                        else if (newOpc == 3) {
+                            newFijo1 = prompt("Ingrese el nuevo telefono fijo:\n");
+
+                            campuland["Trainers"][q]["telefonoFijo"] = newFijo1
+
+                            confirmacion2 = prompt("Si deseas cambiar otra información escribe: si, de lo contrario preciona enter\n")
+                        }
+                        else if (newOpc == 4) {
+                            confirmacion2 = false
+                        }
+                        menuTrainer()
+                    }
+                }
+
+                else if (opcMenuTrainer == 4) {
+                    trainers = false
+                }
+            }
+        }
+    }
+
+    if (user == campuland["Coordinador"][0]["user"]["login"]) {
+        x += 1
+        var passwordCoordinador = prompt("Ingresa la contraseña:\n")//si el usuario ingresado es el del coordinador se le pide la contraseña
+        while (passwordCoordinador != campuland["Coordinador"][0]["user"]["contraseña"]) {
+            passwordCoordinador = prompt("Contraseña incorrecta ingresela otra vez\n")
+        }
+        menuCoordinador()
+        var opcMenuCoordinador = prompt("Ingresa tu opcion:\n");
+
+        bol3 = true;
+        while (bol3 == true) {
+            if (opcMenuCoordinador == 1) {
+                console.log("----Usuarios----\nCampers\nTrainers\nCoordinador")
+                var personaCambiar = prompt("¿Que usuario quieres cambiar?:\n")
+                while (!campuland.includes(personaCambiar)) {
+                    personaCambiar = prompt("Ingresa un usuario de los que aparecen en pantalla (Tienes que escribirlos como se ven ahi):\n")
+                }
+                if (personaCambiar == "Campers" || personaCambiar == "Trainers") {
+                    console.log("-----", personaCambiar, "-----");
+                    for (const r in campuland[personaCambiar]) {
+                        console.log("------------------\n");
+                        console.log("Nombre:", r["nombres"]);
+                        console.log("ID:", r["id"]);
+                        console.log("------------------\n")
+
+                        console.log("Ingresa el id del", personaCambiar, "que quieres cambiar:")
+                        user1 = prompt()
+
+                        var u = 0
+                        while (u == 0) {
+                            for (const t in campuland[personaCambiar]) {
+                                if (user1 == campuland[personaCambiar][t]["id"]) {
+                                    u = 1
+                                }
+
+                            }
+                        }
+
+
+                    }
+                }
+
+            }
+
+
+
+
+        }
+    }
+
+    for (w in campuland[personaCambiar]) {
+        if (user1 == campuland[personaCambiar][w]["id"]) {
+            newUser20 = prompt("Cual es el nuevo usuario\n")
+        }
+        bol4 = true;
+        while (bol4 == true) {
+            cont2 = 0
+            for (const e in campuland["Campers"]) {
+                if (newUser20 == campuland["Campers"][e]["user"]["login"]) {
+                    cont2 = cont2 + 1
+                }
+            }
+            for (const r in campuland["Trainers"]) {
+                if (newUser20 == campuland["Trainers"][r]["user"]["login"]) {
+                    cont2 = cont2 + 1
+                }
+            }
+            if (newUser20 == campuland["Coordinador"][0]["user"]["login"]) {
+                cont7 = cont7 + 1
+            }
+            if (cont7 == 0) {
+                bol50 = False
+            }
+            else {
+                newUser20 = prompt("Ese usuario ya existe por favor ingresa uno nuevo\n")
+            }
+            campuland[personaCambiar][w]["user"]["login"] = newUser20
+
+            newPassword20 = prompt("Cual es la nueva contraseña\n")
+            campuland[personaCambiar][w]["user"]["contraseña"] = newPassword20
+
+
+            newUser20 = prompt("Cual es el nuevo usuario\n")
+
+
+            bol5 = True;
+            while (bol5 == True) {
+                cont3 = 0
+            }
+
+
+            for (const e in campuland["Campers"]) {
+                if (newUser20 == campuland["Campers"][e]["user"]["login"]) {
+                    cont3 = cont3 + 1
+                }
+
+                for (const r in campuland["Trainers"]) {
+                    if (newUser20 == campuland["Trainers"][r]["user"]["login"]) {
+                        cont3 = cont3 + 1
+                    }
+
+
+
+                }
+            }
+
+
+            if (newUser20 == campuland["Coordinador"][0]["user"]["login"]) {
+                cont3 = cont3 + 1
+
+            }
+
+            if (cont7 == 0) {
+                bol4 = False
+
+            }
+            else {
+                var newUser20 = prompt("Ese usuario ya existe por favor ingresa uno nuevo\n")
+            }
+
+
+            campuland["Coordinador"][0]["user"]["login"] = newUser20
+
+            var newPassword20 = prompt("Cual es la nueva contraseña\n")
+            campuland["Coordinador"][0]["user"]["contraseña"] = newPassword20
+
+
+            system("clear")
+            console.log("Usuario y contraseña cambiado con exito\n")
+
+            menuCoordinador()
+
         }
     }
 
 }
+
+
